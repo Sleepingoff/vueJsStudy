@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+        }
+      }
+    </script>
+    <script type="module">
+      import { createApp, ref } from "vue";
+      console.log("index");
+
+      import App from "./App.js";
+
+      const app = createApp(App);
+      app.config.errorHandler = (err) => {
+        console.error(err);
+      };
+      app.mount("#app");
+    </script>
+    <title></title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
