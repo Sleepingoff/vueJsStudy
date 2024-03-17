@@ -14,19 +14,25 @@
     </script>
     <script type="module">
       import { createApp, ref } from "vue";
-      console.log("index");
 
       import App from "./App.js";
+      import MyComponent from "./MyComponent.js";
 
       const app = createApp(App);
+      app.component("my-component", MyComponent);
+
       app.config.errorHandler = (err) => {
         console.error(err);
       };
+
       app.mount("#app");
     </script>
     <title></title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      {{message}}
+      <my-component @click:message="handleClickMessage" />
+    </div>
   </body>
 </html>
