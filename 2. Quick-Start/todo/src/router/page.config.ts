@@ -1,6 +1,6 @@
 class PageUrl {
   public home = "/";
-  public splash = "/splash";
+  public splash = "/login";
 }
 
 export default new PageUrl();

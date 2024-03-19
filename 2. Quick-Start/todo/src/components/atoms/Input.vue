@@ -1,14 +1,24 @@
 <template>
-    <input :type="type" />
+    <input :type="type" v-model="modelValue" @change="onChagneInput" />
 </template>
 <script setup lang='ts'>
+import { ref } from 'vue';
+
 
 type PropType = {
-    type: string
+    type: string,
 }
 
-const props = defineProps<PropType>();
+defineProps<PropType>();
 
+const emits = defineEmits(['change'])
+
+const modelValue = ref();
+const onChagneInput = (e: Event) => {
+    const target = e.target as HTMLInputElement;
+    modelValue.value = target.value;
+    emits('change', modelValue);
+}
 </script>
 <style scoped>
 input {
