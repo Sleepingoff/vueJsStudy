@@ -16,13 +16,13 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  const { getUserInfo } = await useAuth();
-  const userInfo = getUserInfo();
+  const { getUserInfo } = useAuth();
+  const userInfo = await getUserInfo();
 
   //로그인하지 않고 다른 페이지로 가는 경우
-  if (to.name !== "Login" && !userInfo) next({ name: "Login" });
+  if (to.name !== "Login" && !userInfo) router.push(url.splash);
   //로그인 하고 로그인 페이지로 가는 경우
-  else if (to.name === "Login" && userInfo) next({ name: "Home" });
+  else if (to.name === "Login" && userInfo) router.push(url.home);
   else next();
 });
 

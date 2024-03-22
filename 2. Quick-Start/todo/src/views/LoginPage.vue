@@ -18,10 +18,9 @@ import { ref } from 'vue';
 const { setUserInfo } = useAuth();
 const username = ref<string>("");
 const password = ref<string>("");
+
 const onSubmitLogin = (e: Event) => {
     e.preventDefault();
-    const target = e.target as HTMLFormElement;
-    console.dir(target);
     router.push(url.home);
 }
 
