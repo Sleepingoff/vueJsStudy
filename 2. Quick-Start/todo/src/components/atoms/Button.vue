@@ -1,7 +1,15 @@
-<template> <button @click="onClickButton">
+<template> <button @click="onClickButton" :type="type">
         <slot></slot>
     </button> </template>
 <script setup lang='ts'>
+
+type PropType = {
+    type?: "button" | "submit" | "reset" | undefined
+}
+
+withDefaults(defineProps<PropType>(), {
+    type: 'button'
+})
 
 const emits = defineEmits(['click']);
 

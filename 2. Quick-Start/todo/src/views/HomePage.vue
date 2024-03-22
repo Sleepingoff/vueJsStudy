@@ -6,7 +6,7 @@
         </ul>
         <form @submit="onSubmitTodos">
             <Input type="text" v-model="newTodos" />
-            <Button>새로운 할 일 추가</Button>
+            <Button type="submit">새로운 할 일 추가</Button>
         </form>
     </main>
 </template>
@@ -30,6 +30,8 @@ const newTodos = ref<string>("");
 const onSubmitTodos = (e: Event) => {
     e.preventDefault();
     todos.value = setTodos(newTodos.value);
+    const elem = e.target as HTMLFormElement;
+    elem.reset();
 }
 </script>
 <style scoped>
