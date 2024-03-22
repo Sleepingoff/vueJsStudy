@@ -7,10 +7,11 @@ const useTodos = () => {
   };
 
   const setTodos = (newTodo: string) => {
-    const newTodos = { todo: newTodo, id: new Date() };
+    const date = new Date();
+
+    const newTodos = { todo: newTodo, id: date.getTime() };
     const currentTodos = getTodos();
     currentTodos.push(newTodos);
-    console.log(currentTodos);
     localStorage.setItem("todos", JSON.stringify(currentTodos));
     return currentTodos;
   };
