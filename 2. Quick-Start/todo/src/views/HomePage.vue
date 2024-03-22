@@ -2,6 +2,7 @@
     <header><span>{{ username }}님 안녕하세요! 오늘은 어떤 일을 해볼까요?</span></header>
     <main>
         <ul>
+            <li v-if="!todos.length">{{ "등록된 할 일이 없네요!" }}</li>
             <li v-for="(todo, idx) in todos" :key="todo.id"><span>{{ idx }}</span>{{ todo.todo }}</li>
         </ul>
         <form @submit="onSubmitTodos">
