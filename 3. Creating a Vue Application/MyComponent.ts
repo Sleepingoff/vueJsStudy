@@ -2,9 +2,9 @@ import { ref } from "vue";
 
 export default {
   emits: ["click:message"],
-  setup(_, { emit }) {
+  setup(_: any, { emit }: any) {
     const message = ref("make error");
-    const onClickMessage = (event) => {
+    const onClickMessage = (event: MouseEvent) => {
       emit("click:message", event);
     };
     return { message, onClickMessage };
