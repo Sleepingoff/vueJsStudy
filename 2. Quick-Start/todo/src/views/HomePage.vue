@@ -34,6 +34,7 @@ const onSubmitTodos = (e: Event) => {
     const elem = e.target as HTMLFormElement;
     elem.reset();
 }
+
 </script>
 <style scoped>
 li {

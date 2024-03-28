@@ -1,5 +1,5 @@
 <template>
-    <input :type="type" v-model="modelValue" @change="onChagneInput" />
+    <input :type="type" v-model="modelValue" @change="onChangeInput" />
 </template>
 <script setup lang='ts'>
 import { ref } from 'vue';
@@ -14,9 +14,7 @@ defineProps<PropType>();
 const emits = defineEmits(['change'])
 
 const modelValue = ref();
-const onChagneInput = (e: Event) => {
-    const target = e.target as HTMLInputElement;
-    modelValue.value = target.value;
+const onChangeInput = () => {
     emits('change', modelValue);
 }
 </script>
