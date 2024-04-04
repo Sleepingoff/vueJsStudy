@@ -1,3 +1,6 @@
+## 10. Event Handling
+* 링크: https://vuejs.org/guide/essentials/event-handling.html
+
 ### 문제 1: Vue에서 DOM 이벤트를 감지하고 이벤트가 발생했을 때 JavaScript 코드를 실행하는 데 사용되는 지시문은 무엇인가요?
 ### 문제 2: 인라인 핸들러에서 네이티브 DOM 이벤트 객체에 접근하는 특수 변수의 이름은 무엇인가요?
 ### 문제 3: .prevent 이벤트 수정자의 주요 기능은 무엇인가요?
