@@ -1,4 +1,5 @@
-## 개념 확인
+## 9. List Rendering
+* 링크: https://vuejs.org/guide/essentials/list.html
 
 ### 문제 1: Vue에서 v-for 지시문을 사용할 때, 어떤 구문을 사용해야 하나요?
 ```js
