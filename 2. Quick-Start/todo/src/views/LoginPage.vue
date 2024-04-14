@@ -4,8 +4,8 @@
         <div v-show="!username">올바른 username을 입력해주세요</div>
         <Input type="password" v-model="password" />
         <div v-show="!password">올바른 password를 입력해주세요</div>
-        <Button @click="handleClickLogin">로그인</Button>
-    </form>
+        <Button type="submit" @click="handleClickLogin">로그인</Button>
+    </form> 
 </template>
 <script setup lang='ts'>
 import Button from '@/components/atoms/Button.vue';
@@ -31,7 +31,6 @@ const handleClickLogin = (e: MouseEvent) => {
         alert("올바른 정보를 입력해주세요");
     } else {
         setUserInfo(userInfo);
-
     }
 }
 
