@@ -12,6 +12,7 @@
     </label>
 </template>
 <script setup lang='ts'>
+import useLocal from '@/store/useLocal';
 import { computed, ref, watch } from 'vue';
 
 
@@ -23,6 +24,9 @@ type Proptype = {
 const prop = defineProps<Proptype>();
 const filterList = ref(prop.filterList);
 const checkedList = computed(() => filterList.value.map(item => item.checked))
+const checkedNameList = computed(() => filterList.value.filter(item => item.checked).map(item => item.name));
+
+
 
 const modelValue = ref<boolean>(false);
 const inversedModelValue = computed(() => !modelValue.value)
@@ -41,13 +45,15 @@ const unCheckAll = () => {
 }
 
 watch(checkedList, () => {
+    const { setLocal } = useLocal();
+    setLocal("filter", checkedNameList.value);
     const allChecked = checkedList.value.every(item => item);
     const allUnChecked = checkedList.value.every(item => !item);
     if (allChecked || allUnChecked) {
         modelValue.value = false;
+        setLocal("filter", filterList.value.map(item => item.name))
     }
 })
-
 
 </script>
 <style scoped>
