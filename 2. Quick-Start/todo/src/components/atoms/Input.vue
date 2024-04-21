@@ -1,6 +1,5 @@
 <template>
     <input :type="type" v-model="modelValue" @change="onChangeInput" />
-
 </template>
 <script setup lang='ts'>
 import { ref } from 'vue';

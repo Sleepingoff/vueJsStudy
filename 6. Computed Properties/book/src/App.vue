@@ -16,32 +16,54 @@ import ResultList from '@/components/ResultList.vue';
 import bookConstants from '@/constants/bookConstants';
 import data from '@/assets/book_data.json';
 import Filter from '@/components/Filter.vue';
+import useLocal from './store/useLocal';
 
-
+const dataList = ref<DataType[]>(data.data);
 const filterList = Object.values(bookConstants).map((list, idx) => {
   return { id: `book-filters-${idx}`, name: list }
 });
 
 const resultList = ref<Array<BookType>>([]);
-const dataList = ref<Array<BookType>>(data.data);
+
+const { getLocal, setLocal } = useLocal();
+setLocal("filter", Object.values(bookConstants));
+const filters = getLocal("filter");
+const storedFilter = ref<Array<string>>(filters);
 
 const handleChangeSearch = (value: Ref<string>) => {
-  //데이터가 많아서 너무 오래 걸림!
-  /*resultList.value = dataList.value.filter((data) => {
-    return value.value.match(data.AUTHOR_NAME || data.BOOK_NAME || data.MAINTENACE_AGENCY || data.REQUEST_FLAG);
-  })*/
-  // switch (value.value) {
-  //   case filter.BOOK_NAME:
-  //   case bookConstants.AUTHOR_NAME:
-  //   case bookConstants.MAINTENACE_AGENCY:
-  //   case bookConstants.REQUEST_FLAG:
-  //   default:
-  //     dataList.value.find((list, idx)=>{
-
-  //     })
-  // }
+  throttle(search, 1000, value.value)();
 }
 
+
+const search = (query: string) => {
+
+  dataList.value.forEach(data => {
+    storedFilter.value.forEach((filter: string) => {
+      const filtering = filter as keyof DataType;
+      if (data[filtering].includes(query)) {
+        resultList.value.push({
+          AUTHOR_NAME: data.저자명,
+          BOOK_NAME: data.도서명,
+          MAINTENACE_AGENCY: data.보유기관,
+          REQUEST_FLAG: data.청구기호,
+        })
+
+      }
+    })
+  })
+}
+
+const throttle = (callback: Function, delay: number, value: string) => {
+  let timer: number | undefined;
+  return function () {
+    if (!timer) {
+      timer = setTimeout(() => {
+        callback(value);
+        timer = undefined;
+      }, delay);
+    }
+  };
+};
 
 </script>
 <style scoped>
