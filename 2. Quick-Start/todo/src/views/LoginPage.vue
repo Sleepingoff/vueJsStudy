@@ -24,7 +24,7 @@ const onSubmitLogin = (e: Event) => {
     router.push(url.home);
 }
 
-const handleClickLogin = () => {
+const handleClickLogin = (e: MouseEvent) => {
     const userInfo = { username: username.value, password: password.value }
     const isCorrectInfo = useCheckAuth(userInfo);
     if (!isCorrectInfo) {
