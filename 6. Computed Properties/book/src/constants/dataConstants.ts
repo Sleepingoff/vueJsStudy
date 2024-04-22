@@ -6,3 +6,5 @@ const dataConstants: DataType = {
   저자명: `저자명`,
   발행자: `발행자`,
 };
+
+export default dataConstants;

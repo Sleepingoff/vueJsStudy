@@ -5,30 +5,37 @@
       <Filter :filter-list="filterList" />
     </article>
     <section>
-      <ResultList :result-list="resultList"></ResultList>
+      <ResultList :result-list="resultList" />
     </section>
   </main>
 </template>
 <script setup lang="ts">
-import { Ref, ref } from 'vue';
+import { Ref, computed, ref, watch } from 'vue';
 import SearchBar from '@/components/SearchBar.vue';
 import ResultList from '@/components/ResultList.vue';
 import bookConstants from '@/constants/bookConstants';
 import data from '@/assets/book_data.json';
 import Filter from '@/components/Filter.vue';
-import useLocal from './store/useLocal';
-
+import useLocal from '@/store/useLocal';
 const dataList = ref<DataType[]>(data.data);
+
 const filterList = Object.values(bookConstants).map((list, idx) => {
   return { id: `book-filters-${idx}`, name: list }
 });
 
-const resultList = ref<Array<BookType>>([]);
+const resultList = computed({
+  get: () => [],
+  set: (value: BookType[]) => {
+    return value;
+  }
+});
 
 const { getLocal, setLocal } = useLocal();
+
 setLocal("filter", Object.values(bookConstants));
 const filters = getLocal("filter");
-const storedFilter = ref<Array<string>>(filters);
+
+const storedFilter = computed(() => filters);
 
 const handleChangeSearch = (value: Ref<string>) => {
   throttle(search, 1000, value.value)();
@@ -36,7 +43,7 @@ const handleChangeSearch = (value: Ref<string>) => {
 
 
 const search = (query: string) => {
-
+  resultList.value = [];
   dataList.value.forEach(data => {
     storedFilter.value.forEach((filter: string) => {
       const filtering = filter as keyof DataType;
@@ -64,7 +71,11 @@ const throttle = (callback: Function, delay: number, value: string) => {
     }
   };
 };
+//todo: 필터가 변경될 때마다 resultList 업데이트해야함
 
+watch(storedFilter.value, () => {
+  resultList.value = [];
+})
 </script>
 <style scoped>
 .logo {

@@ -1,3 +1,5 @@
+import dataConstants from "./dataConstants";
+
 const bookConstants: BookType = {
   REQUEST_FLAG: dataConstants.청구기호,
   MAINTENACE_AGENCY: dataConstants.보유기관,
